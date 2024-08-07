@@ -50,7 +50,7 @@ def wait_until():
 
 # 로그인 함수
 def login():
-    # 페이지 열기 (여기서는 예시 URL 사용, 실제로는 원하는 페이지 URL로 교체)
+    # 페이지 열기
     driver.get(Constants.LOGIN_URL.value)
 
     # 페이지 로딩을 기다리기
