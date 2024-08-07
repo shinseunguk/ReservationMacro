@@ -1,0 +1,7 @@
+# Ignore configuration files
+config.json
+
+# 기타 무시할 파일 및 디렉토리
+node_modules/
+*.log
+.env
