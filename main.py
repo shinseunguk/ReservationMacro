@@ -34,7 +34,7 @@ driver.maximize_window()
 def wait_until():
     now = datetime.now()
     # 오늘의 10:00 AM 설정
-    target_time = now.replace(hour=10, minute=0, second=0, microsecond=500000)
+    target_time = now.replace(hour=10, minute=0, second=0, microsecond=300000)
 
     # 현재 시간이 10:00 AM 이후인 경우, 다음 날 10:00 AM으로 설정
     if now > target_time:
@@ -98,8 +98,6 @@ def ready_for_reservation() :
     else:
         print("Submit button not found")
 
-    wait_until()  # 10:00 AM까지 대기
-
     # 조회 버튼 클릭하기
     submit_button.click()
 
@@ -114,6 +112,9 @@ def ready_for_reservation() :
         EC.element_to_be_clickable((By.ID, "date-20240907"))
     )
     date_td.click()
+
+    wait_until()  # 10:00 AM까지 대기
+    driver.refresh() # 10시에 새로고침
 
     # 08:00 ~ 10:00 체크박스 선택
     checkbox = WebDriverWait(driver, Constants.TIMEOUT.value).until(
