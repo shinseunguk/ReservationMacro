@@ -84,7 +84,7 @@ def ready_for_reservation() :
     # select 요소 찾기
     select_element = WebDriverWait(driver, Constants.TIMEOUT.value).until(EC.presence_of_element_located((By.ID, "center")))
     select = Select(select_element)
-    select.select_by_value("GUNPO01")  # value 속성을 사용하여 선택
+    select.select_by_value("GUNPO02")  # value 속성을 사용하여 선택
 
     # 조회 버튼 찾기 (CSS 선택자로 찾기)
     submit_button = WebDriverWait(driver, Constants.TIMEOUT.value).until(
@@ -109,27 +109,34 @@ def ready_for_reservation() :
 
     # 특정 날짜(td) 클릭하기 ex) 당일이 8/2일 이면 9/2일을 선택
     date_td = WebDriverWait(driver, Constants.TIMEOUT.value).until(
-        EC.element_to_be_clickable((By.ID, "date-20240907"))
+        EC.element_to_be_clickable((By.ID, "date-20241005"))
     )
     date_td.click()
 
     wait_until()  # 10:00 AM까지 대기
-    driver.refresh() # 10시에 새로고침
 
     # 08:00 ~ 10:00 체크박스 선택
-    checkbox = WebDriverWait(driver, Constants.TIMEOUT.value).until(
-        EC.element_to_be_clickable((By.ID, "checkbox_time_1"))
-    )
-    checkbox.click()
+    while True:
+        driver.refresh()  # 페이지 새로고침
+        try:
+            checkbox = WebDriverWait(driver, 0.5).until(
+                EC.element_to_be_clickable((By.ID, "checkbox_time_1"))
+            )
+            checkbox.click()
+            print("Checkbox clicked successfully!")
+            break  # 체크박스가 발견되면 루프 종료
+        except:
+            print("Checkbox not found, refreshing the page...")
 
 def apply_for_reservation():
     # 페이지 로딩을 기다리기
     WebDriverWait(driver, Constants.TIMEOUT.value).until(EC.presence_of_element_located((By.ID, "team_nm")))
 
-    # '팀명' 입력 필드 찾기 및 값 입력
-    team_nm_field = driver.find_element(By.ID, "team_nm")
-    team_nm_field.clear()  # 기존 값 지우기 (선택 사항)
-    team_nm_field.send_keys("김민제")  # 팀명 입력하기
+    # 삼성 마을 구장 전용
+    # '팀명' 입력 필드 찾기 및 값 입력 
+    # team_nm_field = driver.find_element(By.ID, "team_nm")
+    # team_nm_field.clear()  # 기존 값 지우기 (선택 사항)
+    # team_nm_field.send_keys("김민제")  # 팀명 입력하기
 
     # '인원수' 입력 필드 찾기 및 값 입력
     users_field = driver.find_element(By.ID, "users")
