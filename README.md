@@ -135,6 +135,9 @@
         except:
             print("Checkbox not found, refreshing the page...")
 ```
+- 개인정보인 아이디, 비밀번호를 config.json을 따로 만들어 .gitignore에 등록해 외부에 노출되지 않도록 구현 (악용을 방지하여 추가적으로 홈페이지 URL도 은닉)
+<img width="836" alt=" 2024-09-05 오후 1 46 30" src="https://github.com/user-attachments/assets/34452807-a151-484d-9e0e-3cfc85af925f">
+
 
 <br>
 
